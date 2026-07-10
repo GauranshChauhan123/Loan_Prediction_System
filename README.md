@@ -1,0 +1,1 @@
+# a loan prediction system that will predict whether a person will get the loan or not
