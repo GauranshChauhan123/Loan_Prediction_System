@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfile.fastapi
+    container_name: loan-api
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    container_name: loan-streamlit
+    ports:
+      - "8501:8501"
+    environment:
+      API_URL: http://fastapi:8000/predict
+    depends_on:
+      - fastapi
+    restart: unless-stopped
